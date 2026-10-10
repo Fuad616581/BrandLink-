@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>BrandLink Admin</title>
+<script src="firebase-config.js"></script>
+<style>
+:root{--bg:#0C1710;--green:#1B3022;--sand:#F5F5DC;--gold:#C8B27A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--sand);font:15px/1.5 system-ui,sans-serif;padding:16px;max-width:900px;margin-inline:auto}
+header{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+h1{font-size:22px;margin:0;color:var(--gold)}
+nav{display:flex;gap:8px;margin:12px 0}
+button{font:inherit;cursor:pointer}
+.btn,nav button,.sm{padding:10px 16px;border-radius:99px;border:1px solid rgba(245,245,220,.3);background:none;color:var(--sand)}
+.btn{background:var(--sand);color:var(--bg);border:0;font-weight:600}
+nav .on{background:var(--sand);color:var(--bg)}
+.sm{padding:6px 12px;font-size:13px}
+form,.card{background:rgba(245,245,220,.05);border:1px solid rgba(245,245,220,.14);border-radius:16px;padding:16px;margin-bottom:12px}
+form{display:grid;gap:10px}
+input,select,textarea{width:100%;padding:11px 14px;border-radius:12px;border:1px solid rgba(245,245,220,.25);background:rgba(245,245,220,.06);color:var(--sand);font:inherit}
+select option{color:#000}
+label{font-size:13px;opacity:.8;display:block}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.card img{width:64px;height:64px;object-fit:cover;border-radius:10px;background:var(--green)}
+.err{color:#ff9d9d}.mut{opacity:.7;font-size:13px}
+a{color:var(--gold)}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<script type="module">
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import {getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import {getFirestore, collection, doc, addDoc, setDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy, serverTimestamp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+const B = window.BL, app = initializeApp(B.config), auth = getAuth(app), db = getFirestore(app);
+const $ = s => document.querySelector(s);
+// Safe DOM builder: all customer data goes through textContent, never innerHTML.
+const h = (t, p = {}, ...k) => {
+  const e = document.createElement(t);
+  for (const [a, v] of Object.entries(p)) a.startsWith('on') ? e.addEventListener(a.slice(2), v) : a === 'class' ? (e.className = v) : e.setAttribute(a, v);
+  k.flat().forEach(c => e.append(c instanceof Node ? c : document.createTextNode(c ?? '')));
+  return e;
+};
+let unsubs = [], editing = null, note = '';
+
+onAuthStateChanged(auth, u => {
+  unsubs.forEach(f => f()); unsubs = [];
+  if (!u) { login(note); note = ''; return; }
+  if (u.email !== B.adminEmail || !u.emailVerified) { note = 'Not authorized: ' + u.email; signOut(auth); return; }
+  panel(u);
+});
+
+function login(msg) {
+  $('#app').replaceChildren(
+    h('h1', {}, 'BrandLink Admin'),
+    h('p', {class: 'mut'}, 'Owner access only.'),
+    h('button', {class: 'btn', onclick: () => signInWithPopup(auth, new GoogleAuthProvider()).catch(e => alert(e.message))}, 'Sign in with Google'),
+    h('p', {class: 'err'}, msg || '')
+  );
+}
+
+async function shrink(file) {
+  const bmp = await createImageBitmap(file);
+  const s = Math.min(1, 900 / Math.max(bmp.width, bmp.height));
+  const c = document.createElement('canvas');
+  c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s);
+  c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+  return c.toDataURL('image/jpeg', .72);
+}
+
+function panel(u) {
+  $('#app').innerHTML = `
+  <header><h1>BrandLink Admin</h1><span class="mut" id="who"></span><button class="sm" id="out">Sign out</button></header>
+  <nav><button class="on" data-t="tp">Products</button><button data-t="to">Orders</button></nav>
+  <section id="tp">
+    <form id="pf">
+      <b id="ft">Add product</b>
+      <div class="two"><div><label>Name (English)</label><input name="nameEn" required></div><div><label>الاسم (عربي)</label><input name="nameAr" dir="rtl"></div></div>
+      <div class="two"><div><label>Description (English)</label><textarea name="descEn" rows="2"></textarea></div><div><label>الوصف (عربي)</label><textarea name="descAr" rows="2" dir="rtl"></textarea></div></div>
+      <div class="two"><div><label>Price</label><input name="price" type="number" min="0" step="any" required></div>
+      <div><label>Category</label><select name="cat"><option value="tops">Tops</option><option value="bottoms">Bottoms</option><option value="shoes">Shoes</option><option value="bags">Bags</option></select></div></div>
+      <div><label>Sizes (comma separated, empty = one size)</label><input name="sizes" placeholder="S,M,L,XL"></div>
+      <div class="two"><div><label>Take a photo (phone camera)</label><input name="cam" type="file" accept="image/*" capture="environment"></div>
+      <div><label>Or choose from gallery</label><input name="file" type="file" accept="image/*"></div></div>
+      <div><label>Or paste an image URL (https://...)</label><input name="url" type="url" placeholder="https://"></div>
+      <label><input name="active" type="checkbox" checked style="width:auto"> Visible in store</label>
+      <div class="row"><button class="btn" type="submit" id="sv">Save product</button><button class="sm" type="button" id="cx" hidden>Cancel edit</button><span class="mut" id="msg"></span></div>
+    </form>
+    <div id="pl"></div>
+  </section>
+  <section id="to" hidden><div id="ol"></div></section>`;
+  $('#who').textContent = u.email;
+  $('#out').onclick = () => signOut(auth);
+  document.querySelectorAll('nav button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('nav button').forEach(x => x.classList.toggle('on', x === b));
+    $('#tp').hidden = b.dataset.t !== 'tp'; $('#to').hidden = b.dataset.t !== 'to';
+  });
+  const f = $('#pf');
+  const reset = () => { editing = null; f.reset(); f.elements.active.checked = true; $('#ft').textContent = 'Add product'; $('#cx').hidden = true; };
+  $('#cx').onclick = reset;
+  f.onsubmit = async e => {
+    e.preventDefault();
+    const g = n => f.elements[n].value.trim(), msg = $('#msg');
+    const data = {nameEn: g('nameEn'), nameAr: g('nameAr'), descEn: g('descEn'), descAr: g('descAr'), price: Number(g('price')), cat: g('cat'),
+      sizes: g('sizes') ? g('sizes').split(',').map(s => s.trim()).filter(Boolean) : [], active: f.elements.active.checked};
+    $('#sv').disabled = true; msg.textContent = 'Saving...';
+    try {
+      let images = editing ? (editing.images || []) : [];
+      const file = f.elements.cam.files[0] || f.elements.file.files[0], url = g('url');
+      if (file) {
+        const d = await shrink(file);
+        if (d.length > 700000) throw new Error('Image is too large, try a smaller photo');
+        images = [d];
+      } else if (url) {
+        if (!/^https:\/\//.test(url)) throw new Error('Image URL must start with https://');
+        images = [url];
+      }
+      data.images = images;
+      if (editing) await setDoc(doc(db, 'products', editing.id), data, {merge: true});
+      else await addDoc(collection(db, 'products'), {...data, createdAt: serverTimestamp()});
+      reset(); msg.textContent = 'Saved ✓';
+    } catch (err) { msg.textContent = ''; alert(err.message); }
+    $('#sv').disabled = false;
+  };
+
+  unsubs.push(onSnapshot(query(collection(db, 'products'), orderBy('createdAt', 'desc')), snap => {
+    $('#pl').replaceChildren(...snap.docs.map(d => {
+      const p = {id: d.id, ...d.data()};
+      const img = (p.images || [])[0];
+      return h('div', {class: 'card row'},
+        img && /^(https:\/\/|data:image\/)/.test(img) ? h('img', {src: img, alt: ''}) : h('img', {alt: ''}),
+        h('div', {style: 'flex:1;min-width:140px'}, h('b', {}, p.nameEn), h('div', {class: 'mut'}, `${p.price} · ${p.cat} · ${p.active ? 'visible' : 'hidden'}`)),
+        h('button', {class: 'sm', onclick: () => {
+          editing = p;
+          for (const k of ['nameEn', 'nameAr', 'descEn', 'descAr', 'price', 'cat']) f.elements[k].value = p[k] ?? '';
+          f.elements.sizes.value = (p.sizes || []).join(','); f.elements.active.checked = !!p.active; f.elements.url.value = '';
+          $('#ft').textContent = 'Edit product'; $('#cx').hidden = false; scrollTo({top: 0, behavior: 'smooth'});
+        }}, 'Edit'),
+        h('button', {class: 'sm', onclick: () => updateDoc(doc(db, 'products', p.id), {active: !p.active})}, p.active ? 'Hide' : 'Show'),
+        h('button', {class: 'sm', onclick: () => confirm('Delete this product?') && deleteDoc(doc(db, 'products', p.id))}, 'Delete'));
+    }));
+  }, e => alert(e.message)));
+
+  unsubs.push(onSnapshot(query(collection(db, 'orders'), orderBy('createdAt', 'desc')), snap => {
+    $('#ol').replaceChildren(...(snap.empty ? [h('p', {class: 'mut'}, 'No orders yet.')] : snap.docs.map(d => {
+      const o = d.data();
+      const map = typeof o.loc === 'string' && o.loc.startsWith('https://www.google.com/maps?q=') ? o.loc : '';
+      const sel = h('select', {onchange: e => updateDoc(doc(db, 'orders', d.id), {status: e.target.value})},
+        ...['new', 'confirmed', 'shipped', 'done', 'cancelled'].map(s => h('option', s === o.status ? {value: s, selected: ''} : {value: s}, s)));
+      return h('div', {class: 'card'},
+        h('b', {}, `${o.id} · ${o.total}`), h('div', {class: 'mut'}, o.createdAt ? o.createdAt.toDate().toLocaleString() : ''),
+        h('div', {}, `${o.name} · ${o.phone}`), h('div', {}, o.addr),
+        h('ul', {}, (o.items || []).map(i => h('li', {}, `${i.name} | ${i.size || '-'} | ${i.color} x ${i.q} @ ${i.price}`))),
+        map ? h('a', {href: map, target: '_blank', rel: 'noopener'}, 'Open location in Google Maps') : h('span', {class: 'mut'}, 'No location'),
+        h('div', {style: 'margin-top:8px'}, sel));
+    })));
+  }, e => alert(e.message)));
+}
+</script>
+</body>
+</html>
