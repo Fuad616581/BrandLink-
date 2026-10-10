@@ -1,6 +1,6 @@
 // BrandLink Firebase settings (these web keys are public by design; Firestore rules protect your data).
 window.BL = {
-  adminEmail: 'brandlink2026@gmail.com',
+  adminEmail: 'brandlink2027@gmail.com',
   currency: '$',            // change to e.g. 'SAR ' or 'YER ' if you want
   config: {
     apiKey: "AIzaSyCkpJ884maj8jZ7-Xinz6nAQGlP1s5XBXo",
