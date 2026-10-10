@@ -11,5 +11,5 @@ window.BL = {
     appId: "1:655229621550:web:8e837b70c63fd710aa16bf"
   },
   // Optional free order emails via emailjs.com (leave empty to skip; orders still appear in admin.html)
-  emailjs: { serviceId: '', templateId: '', publicKey: '' }
+  emailjs: { serviceId: 'service_k1i6evn', templateId: 'template_zlvylwa', publicKey: 'lj9zMUD8Af7aH-1_h' }
 };
