@@ -134,7 +134,7 @@ function panel(u) {
       const img = (p.images || [])[0];
       return h('div', {class: 'card row'},
         img && /^(https:\/\/|data:image\/)/.test(img) ? h('img', {src: img, alt: ''}) : h('img', {alt: ''}),
-        h('div', {style: 'flex:1;min-width:140px'}, h('b', {}, p.nameEn), h('div', {class: 'mut'}, `${p.price} · ${p.cat} · ${p.active ? 'visible' : 'hidden'}`)),
+        h('div', {style: 'flex:1;min-width:140px'}, h('b', {}, p.nameEn), h('div', {class: 'mut'}, `${B.currency || ''}${p.price} · ${p.cat} · ${p.active ? 'visible' : 'hidden'}`)),
         h('button', {class: 'sm', onclick: () => {
           editing = p;
           for (const k of ['nameEn', 'nameAr', 'descEn', 'descAr', 'price', 'cat']) f.elements[k].value = p[k] ?? '';
@@ -153,9 +153,9 @@ function panel(u) {
       const sel = h('select', {onchange: e => updateDoc(doc(db, 'orders', d.id), {status: e.target.value})},
         ...['new', 'confirmed', 'shipped', 'done', 'cancelled'].map(s => h('option', s === o.status ? {value: s, selected: ''} : {value: s}, s)));
       return h('div', {class: 'card'},
-        h('b', {}, `${o.id} · ${o.total}`), h('div', {class: 'mut'}, o.createdAt ? o.createdAt.toDate().toLocaleString() : ''),
+        h('b', {}, `${o.id} · ${B.currency || ''}${o.total}`), h('div', {class: 'mut'}, o.createdAt ? o.createdAt.toDate().toLocaleString() : ''),
         h('div', {}, `${o.name} · ${o.phone}`), h('div', {}, o.addr),
-        h('ul', {}, (o.items || []).map(i => h('li', {}, `${i.name} | ${i.size || '-'} | ${i.color} x ${i.q} @ ${i.price}`))),
+        h('ul', {}, (o.items || []).map(i => h('li', {}, `${i.name} | ${i.size || '-'} | ${i.color} x ${i.q} @ ${B.currency || ''}${i.price}`))),
         map ? h('a', {href: map, target: '_blank', rel: 'noopener'}, 'Open location in Google Maps') : h('span', {class: 'mut'}, 'No location'),
         h('div', {style: 'margin-top:8px'}, sel));
     })));

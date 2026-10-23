@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>BrandLink</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%22-160%20-160%201164%201244%22%3E%3Crect%20x=%22-160%22%20y=%22-160%22%20width=%221164%22%20height=%221244%22%20rx=%22150%22%20fill=%22%231B3022%22/%3E%3Cpath%20fill=%22%23F5F5DC%22%20fill-rule=%22evenodd%22%20d=%22M194,424L179,425L141,441L97,470L69,498L43,535L27,574L19,588L13,613L8,659L8,906L10,911L15,914L336,914L339,911L337,906L318,895L288,870L247,824L102,823L97,816L98,654L101,632L116,582L134,554L148,539L163,527L192,513L196,509L198,429ZM232,129L228,136L229,673L235,714L251,767L259,783L282,818L309,846L355,879L406,901L442,910L465,913L521,914L832,913L836,907L836,829L834,825L830,823L473,823L437,815L407,804L375,782L356,763L341,742L330,720L319,665L317,132L310,127ZM11,10L8,25L9,514L11,518L17,516L31,493L46,474L92,434L98,425L97,104L99,100L107,96L377,96L417,104L447,120L471,139L489,159L505,184L513,207L520,240L521,262L519,283L513,307L497,340L476,367L458,384L436,398L417,407L389,414L356,415L351,419L351,499L357,504L379,505L415,513L448,529L479,556L496,578L507,597L513,613L520,646L521,683L506,735L490,762L481,774L469,785L469,789L471,791L579,790L584,785L592,765L610,702L612,684L612,638L610,623L593,568L585,550L571,527L555,505L508,463L509,457L536,435L568,399L582,376L602,324L610,291L612,255L607,208L600,182L586,145L563,108L525,67L496,46L450,24L401,11L372,8L15,8Z%22/%3E%3C/svg%3E">
 <script src="firebase-config.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:ital,wght@1,500&family=Inter:wght@400;500&family=Cairo:wght@500;800&display=swap" rel="stylesheet">
 <style>
@@ -179,11 +180,16 @@ body{background:var(--bg);color:var(--sand);font-family:Inter,system-ui,sans-ser
 .step p{font-size:14px;line-height:1.6;opacity:.75}
 .fine{margin-top:22px;font-size:13px;opacity:.75;line-height:1.7;max-width:70ch}.fine a{color:var(--gold)}
 @media (max-width:699px){.steps{grid-template-columns:1fr}.how h2{max-width:none}}
+.logo{display:flex;align-items:center;gap:10px;color:var(--sand);text-decoration:none}
+.lg-mark{height:40px;width:auto;fill:currentColor;flex:none}
+.lg-word{height:12px;width:auto;fill:currentColor;flex:none}
+.logo:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+@media (max-width:420px){.lg-word{display:none}}
 </style>
 </head>
 <body>
 <header class="nav">
-  <div class="logo">BrandLink</div>
+  <a class="logo" href="#" aria-label="BrandLink"><svg class="lg-mark" viewBox="0 0 844 924" aria-hidden="true"><path fill-rule="evenodd" d="M194,424L179,425L141,441L97,470L69,498L43,535L27,574L19,588L13,613L8,659L8,906L10,911L15,914L336,914L339,911L337,906L318,895L288,870L247,824L102,823L97,816L98,654L101,632L116,582L134,554L148,539L163,527L192,513L196,509L198,429ZM232,129L228,136L229,673L235,714L251,767L259,783L282,818L309,846L355,879L406,901L442,910L465,913L521,914L832,913L836,907L836,829L834,825L830,823L473,823L437,815L407,804L375,782L356,763L341,742L330,720L319,665L317,132L310,127ZM11,10L8,25L9,514L11,518L17,516L31,493L46,474L92,434L98,425L97,104L99,100L107,96L377,96L417,104L447,120L471,139L489,159L505,184L513,207L520,240L521,262L519,283L513,307L497,340L476,367L458,384L436,398L417,407L389,414L356,415L351,419L351,499L357,504L379,505L415,513L448,529L479,556L496,578L507,597L513,613L520,646L521,683L506,735L490,762L481,774L469,785L469,789L471,791L579,790L584,785L592,765L610,702L612,684L612,638L610,623L593,568L585,550L571,527L555,505L508,463L509,457L536,435L568,399L582,376L602,324L610,291L612,255L607,208L600,182L586,145L563,108L525,67L496,46L450,24L401,11L372,8L15,8Z"/></svg><svg class="lg-word" viewBox="0 0 2146 266" aria-hidden="true"><path fill-rule="evenodd" d="M1331,11L1327,17L1326,85L1328,253L1336,257L1495,255L1498,251L1499,239L1494,232L1378,231L1373,227L1372,17L1366,10ZM1931,11L1928,16L1928,218L1930,252L1935,256L1965,256L1972,251L1973,182L1977,173L2001,146L2006,145L2018,158L2087,253L2094,256L2135,256L2138,253L2138,248L2114,218L2038,113L2040,105L2124,17L2124,11L2120,9L2101,9L2091,13L1994,116L1978,130L1973,127L1973,15L1971,12L1962,9L1936,9ZM1660,10L1655,16L1655,249L1657,253L1664,256L1678,255L1683,245L1682,79L1687,76L1754,157L1823,249L1833,256L1857,256L1861,251L1862,245L1861,14L1854,9L1839,10L1835,14L1834,19L1836,179L1835,182L1830,185L1825,181L1785,127L1773,114L1756,89L1715,40L1697,15L1685,9ZM1550,9L1541,12L1539,17L1540,250L1547,256L1579,256L1585,251L1585,15L1580,10ZM1052,11L1049,15L1049,250L1051,254L1057,257L1147,257L1166,255L1198,247L1214,240L1234,227L1248,213L1263,190L1274,150L1274,116L1272,102L1265,77L1247,50L1230,35L1207,21L1174,12L1131,9L1057,9ZM1095,35L1150,34L1171,38L1192,49L1207,64L1218,82L1226,104L1228,118L1228,145L1225,165L1210,197L1192,215L1178,224L1162,229L1139,232L1097,231L1092,225L1091,42ZM776,11L773,17L773,246L775,253L780,256L795,256L801,249L800,78L804,72L808,72L940,245L952,255L976,255L979,251L980,161L978,14L972,10L960,9L955,11L952,17L953,179L950,183L947,183L930,164L890,108L813,11L806,9L780,9ZM591,10L586,16L545,120L530,151L514,193L507,205L493,242L491,253L494,256L515,256L521,251L539,202L549,189L643,188L654,189L660,194L682,244L690,255L696,257L729,256L731,254L730,244L716,217L706,189L692,162L673,111L666,99L630,15L623,9ZM599,59L603,60L607,66L611,81L626,113L636,142L643,154L644,161L640,166L568,166L560,161L561,151L570,134L587,82ZM264,11L261,15L260,246L262,253L275,257L300,257L306,253L306,160L311,154L316,153L349,154L356,160L386,207L402,238L416,254L422,256L461,256L464,253L463,248L403,156L403,150L406,147L416,144L428,137L443,122L448,114L453,94L454,73L449,51L443,41L431,28L419,20L391,11L354,9L270,9ZM307,38L312,34L368,34L379,36L392,43L401,53L409,76L408,94L400,112L391,121L376,128L354,130L314,130L309,128L306,124ZM12,10L8,15L8,248L11,255L15,257L135,256L164,250L184,240L203,221L208,211L211,191L209,167L202,151L182,131L173,127L170,123L188,103L193,94L198,77L197,60L189,39L180,29L168,21L135,11L98,9ZM55,145L60,140L116,139L135,142L147,147L160,162L165,178L165,194L160,210L155,217L145,225L127,231L63,232L58,230L54,225ZM54,39L62,34L120,34L136,40L147,50L154,65L154,82L149,93L139,104L124,113L63,114L58,112L54,108Z"/></svg></a>
   <nav class="pill" aria-label="Main"><a href="#">The Drop</a><a href="#why">Why BrandLink</a><a href="#join">Members</a></nav>
   <div class="nr"><button class="cartbtn" id="cartbtn" type="button" data-a="bag">Bag <b>0</b></button><button class="lang" id="lang" type="button" aria-label="Language">عربي</button><a class="shop" href="#" aria-label="Shop">Shop</a></div>
 </header>
@@ -241,7 +247,7 @@ body{background:var(--bg);color:var(--sand);font-family:Inter,system-ui,sans-ser
 </section>
 </main>
 <footer class="foot">
-  <div class="flinks"><a href="https://wa.me/967783254757" target="_blank" rel="noopener">WhatsApp</a><a href="legal.html">Terms &amp; Privacy</a><span>© 2026 BrandLink</span></div>
+  <div class="flinks"><a href="https://wa.me/967783254757" target="_blank" rel="noopener">WhatsApp</a><a href="https://www.instagram.com/brandlink_store/" target="_blank" rel="noopener">Instagram</a><a href="legal.html">Terms &amp; Privacy</a><span>© 2026 BrandLink</span></div>
   <div class="giant" aria-hidden="true">BrandLink</div>
 </footer>
 <a class="wa-fab" href="https://wa.me/967783254757" target="_blank" rel="noopener">WhatsApp</a>
@@ -385,7 +391,7 @@ const AR = [
   ['.step:nth-child(2) h3', 'نتواصل معك'], ['.step:nth-child(2) p', 'نراسلك على واتساب لتأكيد الطلب ورسوم التوصيل حسب موقعك.'],
   ['.step:nth-child(3) h3', 'ادفع عند الاستلام'], ['.step:nth-child(3) p', 'الدفع نقداً عند الاستلام أو عبر المحافظ الإلكترونية. نوصّل الطلب بأنفسنا.'],
   ['.fine', 'للطلاب: أرسلوا بطاقتكم الطلابية على واتساب لخصم 15%. الإرجاع خلال 30 يوماً. <a href="legal.html">الشروط والخصوصية</a>'],
-  ['.flinks a:nth-of-type(2)', 'الشروط والخصوصية'],
+  ['.flinks a:nth-of-type(3)', 'الشروط والخصوصية'],
   ['.flinks a', 'واتساب'], ['.flinks span', '© 2026 براند لينك']
 ];
 const EN = {};
@@ -408,7 +414,7 @@ if (saved === 'ar') setLang('ar');
 </script>
 <script>
 (function () {
-  const CUR = (window.BL && window.BL.currency) || '$', $ = id => document.getElementById(id);
+  const CUR = (window.BL && window.BL.currency) || '$', CURAR = (window.BL && window.BL.currencyAr) || 'ريال', $ = id => document.getElementById(id);
   const D = {
     en: {shop: 'Shop', h: 'Pick your <em>piece.</em>', all: 'All', tops: 'Tops', bottoms: 'Bottoms', shoes: 'Shoes', bags: 'Bags', size: 'Size', color: 'Color', qty: 'Quantity', one: 'One size', add: 'Add to bag', bag: 'Bag', empty: 'Your bag is empty.', sub: 'Subtotal (excl. delivery)', note: 'Delivery fee depends on your location and is confirmed with you on WhatsApp. Pay on delivery or by e-wallet.', checkout: 'Checkout', back: 'Back to bag', name: 'Full name', phone: 'Phone number', addr: 'Delivery address', loc: 'Share my location', locOk: 'Location added ✓', locErr: 'Could not get your location.', place: 'Place order', done: 'Order placed', doneMsg: "Thank you! We'll contact you to confirm your order.", demo: 'We will contact you on WhatsApp to confirm your order, the delivery fee and payment.', rm: 'Remove', wa: 'Confirm on WhatsApp', fail: 'Could not send the order. Please try again.', close: 'Close', need: 'Please fill in name, phone and address.', total: 'Total (excl. delivery)', terms: 'Terms, returns and privacy'},
     ar: {shop: 'المتجر', h: 'اختر <em>قطعتك.</em>', all: 'الكل', tops: 'القطع العلوية', bottoms: 'البناطيل', shoes: 'الأحذية', bags: 'الحقائب', size: 'المقاس', color: 'اللون', qty: 'الكمية', one: 'مقاس واحد', add: 'أضف إلى الحقيبة', bag: 'الحقيبة', empty: 'حقيبتك فارغة.', sub: 'المجموع (بدون التوصيل)', note: 'تُحدَّد رسوم التوصيل حسب موقعك وتُؤكَّد معك عبر واتساب. الدفع عند الاستلام أو بالمحفظة الإلكترونية.', checkout: 'إتمام الطلب', back: 'العودة للحقيبة', name: 'الاسم الكامل', phone: 'رقم الجوال', addr: 'عنوان التوصيل', loc: 'مشاركة موقعي', locOk: 'تمت إضافة الموقع ✓', locErr: 'تعذّر تحديد موقعك.', place: 'إرسال الطلب', done: 'تم إرسال الطلب', doneMsg: 'شكراً لك! سنتواصل معك لتأكيد طلبك.', demo: 'سنتواصل معك عبر واتساب لتأكيد طلبك ورسوم التوصيل والدفع.', rm: 'حذف', wa: 'تأكيد عبر واتساب', fail: 'تعذّر إرسال الطلب. حاول مرة أخرى.', close: 'إغلاق', need: 'يرجى تعبئة الاسم والجوال والعنوان.', total: 'الإجمالي (بدون التوصيل)', terms: 'الشروط والإرجاع والخصوصية'}
@@ -435,7 +441,7 @@ if (saved === 'ar') setLang('ar');
   const save = () => { try { localStorage.setItem('bl-cart', JSON.stringify(cart)); } catch (e) {} };
   const L = () => document.documentElement.lang === 'ar' ? 'ar' : 'en';
   const t = k => D[L()][k];
-  const fmt = n => CUR + n.toLocaleString('en-US');
+  const fmt = n => L() === 'ar' ? n.toLocaleString('en-US') + ' ' + CURAR : CUR + n.toLocaleString('en-US');
   const prod = id => P.find(p => p.id === id);
   const pic = p => p.img ? `<img src="${p.img.replace(/"/g, '%22')}" alt="" loading="lazy">` : art(p.art);
   const art = k => `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">${ART[k].map(d => `<path d="${d}"/>`).join('')}</svg>`;
@@ -526,14 +532,21 @@ if (saved === 'ar') setLang('ar');
 <script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import {getFirestore, collection, getDocs, query, where, doc, setDoc, serverTimestamp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
-const db = getFirestore(initializeApp(window.BL.config));
+const app = initializeApp(window.BL.config), db = getFirestore(app);
+let ga = null;
+import('https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js')
+  .then(m => { ga = {m, a: m.getAnalytics(app)}; })
+  .catch(() => {});
+const track = (name, p) => { try { if (ga) ga.m.logEvent(ga.a, name, p || {}); } catch (e) {} };
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('a[href*="wa.me"]')) track('whatsapp_click'); });
 window.BL_placeOrder = async o => {
   await setDoc(doc(db, 'orders', o.id), {...o, status: 'new', createdAt: serverTimestamp()});
+  track('order_placed', {value: o.total, currency: 'YER'});
   const E = window.BL.emailjs;
   if (E && E.serviceId && E.templateId && E.publicKey) {
     fetch('https://api.emailjs.com/api/v1.0/email/send', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
       service_id: E.serviceId, template_id: E.templateId, user_id: E.publicKey,
-      template_params: {order_id: o.id, customer: o.name, phone: o.phone, address: o.addr, total: o.total, map_link: o.loc || 'No location shared',
+      template_params: {order_id: o.id, customer: o.name, phone: o.phone, address: o.addr, total: (window.BL.currency || '$') + Number(o.total).toLocaleString('en-US'), map_link: o.loc || 'No location shared',
         items: o.items.map(i => `${i.name} | ${i.size || '-'} | ${i.color} x ${i.q} @ ${i.price}`).join('\n')}})}).catch(() => {});
   }
 };
