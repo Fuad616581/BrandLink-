@@ -84,6 +84,7 @@ function panel(u) {
       <div class="two"><div><label>Description (English)</label><textarea name="descEn" rows="2"></textarea></div><div><label>الوصف (عربي)</label><textarea name="descAr" rows="2" dir="rtl"></textarea></div></div>
       <div class="two"><div><label>Price</label><input name="price" type="number" min="0" step="any" required></div>
       <div><label>Category</label><select name="cat"><option value="tops">Tops</option><option value="bottoms">Bottoms</option><option value="shoes">Shoes</option><option value="bags">Bags</option></select></div></div>
+      <div><label>For</label><select name="audience"><option value="all">Everyone</option><option value="women">Women</option></select></div>
       <div><label>Sizes (comma separated, empty = one size)</label><input name="sizes" placeholder="S,M,L,XL"></div>
       <div class="two"><div><label>Take a photo (phone camera)</label><input name="cam" type="file" accept="image/*" capture="environment"></div>
       <div><label>Or choose from gallery</label><input name="file" type="file" accept="image/*"></div></div>
@@ -106,7 +107,7 @@ function panel(u) {
   f.onsubmit = async e => {
     e.preventDefault();
     const g = n => f.elements[n].value.trim(), msg = $('#msg');
-    const data = {nameEn: g('nameEn'), nameAr: g('nameAr'), descEn: g('descEn'), descAr: g('descAr'), price: Number(g('price')), cat: g('cat'),
+    const data = {nameEn: g('nameEn'), nameAr: g('nameAr'), descEn: g('descEn'), descAr: g('descAr'), price: Number(g('price')), cat: g('cat'), audience: g('audience'),
       sizes: g('sizes') ? g('sizes').split(',').map(s => s.trim()).filter(Boolean) : [], active: f.elements.active.checked};
     $('#sv').disabled = true; msg.textContent = 'Saving...';
     try {
@@ -134,11 +135,11 @@ function panel(u) {
       const img = (p.images || [])[0];
       return h('div', {class: 'card row'},
         img && /^(https:\/\/|data:image\/)/.test(img) ? h('img', {src: img, alt: ''}) : h('img', {alt: ''}),
-        h('div', {style: 'flex:1;min-width:140px'}, h('b', {}, p.nameEn), h('div', {class: 'mut'}, `${B.currency || ''}${p.price} · ${p.cat} · ${p.active ? 'visible' : 'hidden'}`)),
+        h('div', {style: 'flex:1;min-width:140px'}, h('b', {}, p.nameEn), h('div', {class: 'mut'}, `${B.currency || ''}${p.price} · ${p.cat}${p.audience === 'women' ? ' · women' : ''} · ${p.active ? 'visible' : 'hidden'}`)),
         h('button', {class: 'sm', onclick: () => {
           editing = p;
           for (const k of ['nameEn', 'nameAr', 'descEn', 'descAr', 'price', 'cat']) f.elements[k].value = p[k] ?? '';
-          f.elements.sizes.value = (p.sizes || []).join(','); f.elements.active.checked = !!p.active; f.elements.url.value = '';
+          f.elements.audience.value = p.audience || 'all'; f.elements.sizes.value = (p.sizes || []).join(','); f.elements.active.checked = !!p.active; f.elements.url.value = '';
           $('#ft').textContent = 'Edit product'; $('#cx').hidden = false; scrollTo({top: 0, behavior: 'smooth'});
         }}, 'Edit'),
         h('button', {class: 'sm', onclick: () => updateDoc(doc(db, 'products', p.id), {active: !p.active})}, p.active ? 'Hide' : 'Show'),

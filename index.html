@@ -185,6 +185,10 @@ body{background:var(--bg);color:var(--sand);font-family:Inter,system-ui,sans-ser
 .lg-word{height:12px;width:auto;fill:currentColor;flex:none}
 .logo:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
 @media (max-width:420px){.lg-word{display:none}}
+.wbtn{background:none;color:var(--sand);border:1px solid rgba(245,245,220,.45);font-family:Inter,Cairo,sans-serif;cursor:pointer;margin-top:10px;padding-right:18px}
+.wbtn:hover{border-color:var(--gold)}
+.wbtn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wbtn span{background:none;color:var(--gold)}
 </style>
 </head>
 <body>
@@ -212,7 +216,7 @@ body{background:var(--bg);color:var(--sand);font-family:Inter,system-ui,sans-ser
       <span class="lbl">The collection</span>
       <h2>Curated drops<em>for you.</em></h2>
       <p>Hand-picked pieces, delivered to your door.</p>
-      <a class="btn" href="#">Shop the drop <span aria-hidden="true">&rarr;</span></a>
+      <a class="btn" href="#">Shop the drop <span aria-hidden="true">&rarr;</span></a> <button class="btn wbtn" type="button" data-a="women">Women's collection <span aria-hidden="true">&rarr;</span></button>
     </div>
     <div class="dia" aria-hidden="true"><div class="tile"></div><div class="tile"></div><div class="tile"></div><div class="tile"></div></div>
     <div class="figs"><span>Fig 1 · The Jacket</span><span>Fig 2 · The Hoodie</span><span>Fig 3 · The Denim</span><span>Fig 4 · The Sneaker</span></div>
@@ -376,7 +380,7 @@ const AR = [
   ['.hint', 'مرّر'], ['.tag', 'تستحق <em>التباهي</em>'],
   ['.coll .lbl', 'المجموعة'], ['.c-copy h2', 'إصدارات مختارة <em>لأجلك.</em>'],
   ['.c-copy p', 'قطع مختارة بعناية، تصلك حتى باب بيتك.'],
-  ['.btn', 'تسوّق الإصدار <span aria-hidden="true">&larr;</span>'],
+  ['.btn', 'تسوّق الإصدار <span aria-hidden="true">&larr;</span>'], ['.wbtn', 'قسم النساء <span aria-hidden="true">&larr;</span>'],
   ['.figs span:nth-child(1)', 'شكل 1 · الجاكيت'], ['.figs span:nth-child(2)', 'شكل 2 · الهودي'],
   ['.figs span:nth-child(3)', 'شكل 3 · الجينز'], ['.figs span:nth-child(4)', 'شكل 4 · الحذاء الرياضي'],
   ['.mtext', 'نحن ننتقي القطع التي تستحق أن تُلبس. <em>فخامة حقيقية. وتوصيل سريع.</em> هنا يؤخذ ذوقك <em>على محمل الجد.</em>'],
@@ -416,8 +420,8 @@ if (saved === 'ar') setLang('ar');
 (function () {
   const CUR = (window.BL && window.BL.currency) || '$', CURAR = (window.BL && window.BL.currencyAr) || 'ريال', $ = id => document.getElementById(id);
   const D = {
-    en: {shop: 'Shop', h: 'Pick your <em>piece.</em>', all: 'All', tops: 'Tops', bottoms: 'Bottoms', shoes: 'Shoes', bags: 'Bags', size: 'Size', color: 'Color', qty: 'Quantity', one: 'One size', add: 'Add to bag', bag: 'Bag', empty: 'Your bag is empty.', sub: 'Subtotal (excl. delivery)', note: 'Delivery fee depends on your location and is confirmed with you on WhatsApp. Pay on delivery or by e-wallet.', checkout: 'Checkout', back: 'Back to bag', name: 'Full name', phone: 'Phone number', addr: 'Delivery address', loc: 'Share my location', locOk: 'Location added ✓', locErr: 'Could not get your location.', place: 'Place order', done: 'Order placed', doneMsg: "Thank you! We'll contact you to confirm your order.", demo: 'We will contact you on WhatsApp to confirm your order, the delivery fee and payment.', rm: 'Remove', wa: 'Confirm on WhatsApp', fail: 'Could not send the order. Please try again.', close: 'Close', need: 'Please fill in name, phone and address.', total: 'Total (excl. delivery)', terms: 'Terms, returns and privacy'},
-    ar: {shop: 'المتجر', h: 'اختر <em>قطعتك.</em>', all: 'الكل', tops: 'القطع العلوية', bottoms: 'البناطيل', shoes: 'الأحذية', bags: 'الحقائب', size: 'المقاس', color: 'اللون', qty: 'الكمية', one: 'مقاس واحد', add: 'أضف إلى الحقيبة', bag: 'الحقيبة', empty: 'حقيبتك فارغة.', sub: 'المجموع (بدون التوصيل)', note: 'تُحدَّد رسوم التوصيل حسب موقعك وتُؤكَّد معك عبر واتساب. الدفع عند الاستلام أو بالمحفظة الإلكترونية.', checkout: 'إتمام الطلب', back: 'العودة للحقيبة', name: 'الاسم الكامل', phone: 'رقم الجوال', addr: 'عنوان التوصيل', loc: 'مشاركة موقعي', locOk: 'تمت إضافة الموقع ✓', locErr: 'تعذّر تحديد موقعك.', place: 'إرسال الطلب', done: 'تم إرسال الطلب', doneMsg: 'شكراً لك! سنتواصل معك لتأكيد طلبك.', demo: 'سنتواصل معك عبر واتساب لتأكيد طلبك ورسوم التوصيل والدفع.', rm: 'حذف', wa: 'تأكيد عبر واتساب', fail: 'تعذّر إرسال الطلب. حاول مرة أخرى.', close: 'إغلاق', need: 'يرجى تعبئة الاسم والجوال والعنوان.', total: 'الإجمالي (بدون التوصيل)', terms: 'الشروط والإرجاع والخصوصية'}
+    en: {shop: 'Shop', h: 'Pick your <em>piece.</em>', all: 'All', women: 'Women', tops: 'Tops', bottoms: 'Bottoms', shoes: 'Shoes', bags: 'Bags', size: 'Size', color: 'Color', qty: 'Quantity', one: 'One size', add: 'Add to bag', bag: 'Bag', empty: 'Your bag is empty.', sub: 'Subtotal (excl. delivery)', note: 'Delivery fee depends on your location and is confirmed with you on WhatsApp. Pay on delivery or by e-wallet.', checkout: 'Checkout', back: 'Back to bag', name: 'Full name', phone: 'Phone number', addr: 'Delivery address', loc: 'Share my location', locOk: 'Location added ✓', locErr: 'Could not get your location.', place: 'Place order', done: 'Order placed', doneMsg: "Thank you! We'll contact you to confirm your order.", demo: 'We will contact you on WhatsApp to confirm your order, the delivery fee and payment.', rm: 'Remove', wa: 'Confirm on WhatsApp', fail: 'Could not send the order. Please try again.', close: 'Close', need: 'Please fill in name, phone and address.', total: 'Total (excl. delivery)', terms: 'Terms, returns and privacy'},
+    ar: {shop: 'المتجر', h: 'اختر <em>قطعتك.</em>', all: 'الكل', women: 'نساء', tops: 'القطع العلوية', bottoms: 'البناطيل', shoes: 'الأحذية', bags: 'الحقائب', size: 'المقاس', color: 'اللون', qty: 'الكمية', one: 'مقاس واحد', add: 'أضف إلى الحقيبة', bag: 'الحقيبة', empty: 'حقيبتك فارغة.', sub: 'المجموع (بدون التوصيل)', note: 'تُحدَّد رسوم التوصيل حسب موقعك وتُؤكَّد معك عبر واتساب. الدفع عند الاستلام أو بالمحفظة الإلكترونية.', checkout: 'إتمام الطلب', back: 'العودة للحقيبة', name: 'الاسم الكامل', phone: 'رقم الجوال', addr: 'عنوان التوصيل', loc: 'مشاركة موقعي', locOk: 'تمت إضافة الموقع ✓', locErr: 'تعذّر تحديد موقعك.', place: 'إرسال الطلب', done: 'تم إرسال الطلب', doneMsg: 'شكراً لك! سنتواصل معك لتأكيد طلبك.', demo: 'سنتواصل معك عبر واتساب لتأكيد طلبك ورسوم التوصيل والدفع.', rm: 'حذف', wa: 'تأكيد عبر واتساب', fail: 'تعذّر إرسال الطلب. حاول مرة أخرى.', close: 'إغلاق', need: 'يرجى تعبئة الاسم والجوال والعنوان.', total: 'الإجمالي (بدون التوصيل)', terms: 'الشروط والإرجاع والخصوصية'}
   };
   const ART = {
     jacket: ['M32 18L44 14L50 30L56 14L68 18L88 46L78 54L72 46V88H28V46L22 54L12 46Z', 'M50 30V88'],
@@ -437,6 +441,7 @@ if (saved === 'ar') setLang('ar');
   ];
   const COL = [['forest', '#1B3022', 'Forest', 'أخضر غابة'], ['sand', '#F5F5DC', 'Sand', 'رملي'], ['black', '#111111', 'Black', 'أسود']];
   let cat = 'all', cart = [], step = 'cart', sel = null, loc = null, doneId = '';
+  try { if (new URLSearchParams(location.search).get('for') === 'women') { cat = 'women'; addEventListener('load', () => setTimeout(() => { const el = document.getElementById('shop'); if (el) el.scrollIntoView(); }, 1200)); } } catch (e) {}
   try { cart = JSON.parse(localStorage.getItem('bl-cart') || '[]'); } catch (e) {}
   const save = () => { try { localStorage.setItem('bl-cart', JSON.stringify(cart)); } catch (e) {} };
   const L = () => document.documentElement.lang === 'ar' ? 'ar' : 'en';
@@ -451,8 +456,8 @@ if (saved === 'ar') setLang('ar');
 
   function renderShop() {
     $('sLbl').textContent = t('shop'); $('sH').innerHTML = t('h');
-    $('chips').innerHTML = ['all', 'tops', 'bottoms', 'shoes', 'bags'].map(c => `<button class="chip" data-a="cat" data-v="${c}" aria-pressed="${c === cat}">${t(c)}</button>`).join('');
-    $('grid').innerHTML = P.filter(p => cat === 'all' || p.cat === cat).map(p => `<button class="pc" data-a="open" data-id="${p.id}"><span class="art">${pic(p)}</span><b>${p[L()]}</b><small>${fmt(p.price)}</small></button>`).join('');
+    $('chips').innerHTML = ['all', 'women', 'tops', 'bottoms', 'shoes', 'bags'].map(c => `<button class="chip" data-a="cat" data-v="${c}" aria-pressed="${c === cat}">${t(c)}</button>`).join('');
+    $('grid').innerHTML = P.filter(p => cat === 'all' || (cat === 'women' ? p.audience === 'women' : p.cat === cat)).map(p => `<button class="pc" data-a="open" data-id="${p.id}"><span class="art">${pic(p)}</span><b>${p[L()]}</b><small>${fmt(p.price)}</small></button>`).join('');
     $('cartbtn').innerHTML = `${t('bag')} <b>${count()}</b>`;
     if (!$('modal').hidden) modal();
     if (!$('drawer').hidden) drawer();
@@ -504,6 +509,7 @@ if (saved === 'ar') setLang('ar');
       if (m) m.q = Math.min(9, m.q + sel.q); else cart.push({...sel});
       upd(); closeModal(); step = 'cart'; openDrawer();
     }
+    else if (k === 'women') { cat = 'women'; renderShop(); const sec = document.getElementById('shop'); if (sec) sec.scrollIntoView({behavior: 'smooth'}); }
     else if (k === 'bag') { step = 'cart'; openDrawer(); }
     else if (k === 'dclose') closeDrawer();
     else if (k === 'inc' || k === 'dec') { cart[i].q = Math.max(1, Math.min(9, cart[i].q + (k === 'inc' ? 1 : -1))); upd(); drawer(); }
@@ -551,7 +557,7 @@ window.BL_placeOrder = async o => {
   }
 };
 getDocs(query(collection(db, 'products'), where('active', '==', true))).then(snap => {
-  const list = snap.docs.map(d => { const x = d.data(); return {id: d.id, cat: x.cat, art: 'tee', img: (x.images || [])[0] || '', price: Number(x.price), en: x.nameEn, ar: x.nameAr || x.nameEn, sizes: x.sizes || [], d: {en: x.descEn || '', ar: x.descAr || x.descEn || ''}}; });
+  const list = snap.docs.map(d => { const x = d.data(); return {id: d.id, cat: x.cat, audience: x.audience || 'all', art: 'tee', img: (x.images || [])[0] || '', price: Number(x.price), en: x.nameEn, ar: x.nameAr || x.nameEn, sizes: x.sizes || [], d: {en: x.descEn || '', ar: x.descAr || x.descEn || ''}}; });
   if (list.length) window.setProducts(list);
 }).catch(console.error);
 </script>
