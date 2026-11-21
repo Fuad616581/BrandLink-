@@ -189,6 +189,11 @@ body{background:var(--bg);color:var(--sand);font-family:Inter,system-ui,sans-ser
 .wbtn:hover{border-color:var(--gold)}
 .wbtn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .wbtn span{background:none;color:var(--gold)}
+.pc.sk{pointer-events:none}
+.pc.sk .art{background:linear-gradient(110deg,rgba(245,245,220,.05) 30%,rgba(245,245,220,.13) 50%,rgba(245,245,220,.05) 70%);background-size:200% 100%;animation:shim 1.4s infinite linear}
+.pc.sk b,.pc.sk small{background:rgba(245,245,220,.08);border-radius:6px;color:transparent}
+@keyframes shim{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.pc.sk .art{animation:none}}
 </style>
 </head>
 <body>
@@ -420,8 +425,8 @@ if (saved === 'ar') setLang('ar');
 (function () {
   const CUR = (window.BL && window.BL.currency) || '$', CURAR = (window.BL && window.BL.currencyAr) || 'ريال', $ = id => document.getElementById(id);
   const D = {
-    en: {shop: 'Shop', h: 'Pick your <em>piece.</em>', all: 'All', women: 'Women', tops: 'Tops', bottoms: 'Bottoms', shoes: 'Shoes', bags: 'Bags', size: 'Size', color: 'Color', qty: 'Quantity', one: 'One size', add: 'Add to bag', bag: 'Bag', empty: 'Your bag is empty.', sub: 'Subtotal (excl. delivery)', note: 'Delivery fee depends on your location and is confirmed with you on WhatsApp. Pay on delivery or by e-wallet.', checkout: 'Checkout', back: 'Back to bag', name: 'Full name', phone: 'Phone number', addr: 'Delivery address', loc: 'Share my location', locOk: 'Location added ✓', locErr: 'Could not get your location.', place: 'Place order', done: 'Order placed', doneMsg: "Thank you! We'll contact you to confirm your order.", demo: 'We will contact you on WhatsApp to confirm your order, the delivery fee and payment.', rm: 'Remove', wa: 'Confirm on WhatsApp', fail: 'Could not send the order. Please try again.', close: 'Close', need: 'Please fill in name, phone and address.', total: 'Total (excl. delivery)', terms: 'Terms, returns and privacy'},
-    ar: {shop: 'المتجر', h: 'اختر <em>قطعتك.</em>', all: 'الكل', women: 'نساء', tops: 'القطع العلوية', bottoms: 'البناطيل', shoes: 'الأحذية', bags: 'الحقائب', size: 'المقاس', color: 'اللون', qty: 'الكمية', one: 'مقاس واحد', add: 'أضف إلى الحقيبة', bag: 'الحقيبة', empty: 'حقيبتك فارغة.', sub: 'المجموع (بدون التوصيل)', note: 'تُحدَّد رسوم التوصيل حسب موقعك وتُؤكَّد معك عبر واتساب. الدفع عند الاستلام أو بالمحفظة الإلكترونية.', checkout: 'إتمام الطلب', back: 'العودة للحقيبة', name: 'الاسم الكامل', phone: 'رقم الجوال', addr: 'عنوان التوصيل', loc: 'مشاركة موقعي', locOk: 'تمت إضافة الموقع ✓', locErr: 'تعذّر تحديد موقعك.', place: 'إرسال الطلب', done: 'تم إرسال الطلب', doneMsg: 'شكراً لك! سنتواصل معك لتأكيد طلبك.', demo: 'سنتواصل معك عبر واتساب لتأكيد طلبك ورسوم التوصيل والدفع.', rm: 'حذف', wa: 'تأكيد عبر واتساب', fail: 'تعذّر إرسال الطلب. حاول مرة أخرى.', close: 'إغلاق', need: 'يرجى تعبئة الاسم والجوال والعنوان.', total: 'الإجمالي (بدون التوصيل)', terms: 'الشروط والإرجاع والخصوصية'}
+    en: {shop: 'Shop', h: 'Pick your <em>piece.</em>', all: 'All', women: 'Women', tops: 'Tops', bottoms: 'Bottoms', shoes: 'Shoes', bags: 'Bags', size: 'Size', color: 'Color', qty: 'Quantity', one: 'One size', add: 'Add to bag', bag: 'Bag', empty: 'Your bag is empty.', sub: 'Subtotal (excl. delivery)', note: 'Delivery fee depends on your location and is confirmed with you on WhatsApp. Pay on delivery or by e-wallet.', checkout: 'Checkout', back: 'Back to bag', name: 'Full name', phone: 'Phone number', addr: 'Delivery address', loc: 'Share my location', locOk: 'Location added ✓', locErr: 'Could not get your location.', place: 'Place order', done: 'Order placed', doneMsg: "Thank you! We'll contact you to confirm your order.", demo: 'We will contact you on WhatsApp to confirm your order, the delivery fee and payment.', rm: 'Remove', wa: 'Confirm on WhatsApp', fail: 'Could not send the order. Please try again.', close: 'Close', need: 'Please fill in name, phone and address.', total: 'Total (excl. delivery)', terms: 'Terms, returns and privacy', loadfail: 'Products are taking longer than usual to load. You can order directly on WhatsApp:', none: 'No products in this section yet.', owa: 'Order on WhatsApp'},
+    ar: {shop: 'المتجر', h: 'اختر <em>قطعتك.</em>', all: 'الكل', women: 'نساء', tops: 'القطع العلوية', bottoms: 'البناطيل', shoes: 'الأحذية', bags: 'الحقائب', size: 'المقاس', color: 'اللون', qty: 'الكمية', one: 'مقاس واحد', add: 'أضف إلى الحقيبة', bag: 'الحقيبة', empty: 'حقيبتك فارغة.', sub: 'المجموع (بدون التوصيل)', note: 'تُحدَّد رسوم التوصيل حسب موقعك وتُؤكَّد معك عبر واتساب. الدفع عند الاستلام أو بالمحفظة الإلكترونية.', checkout: 'إتمام الطلب', back: 'العودة للحقيبة', name: 'الاسم الكامل', phone: 'رقم الجوال', addr: 'عنوان التوصيل', loc: 'مشاركة موقعي', locOk: 'تمت إضافة الموقع ✓', locErr: 'تعذّر تحديد موقعك.', place: 'إرسال الطلب', done: 'تم إرسال الطلب', doneMsg: 'شكراً لك! سنتواصل معك لتأكيد طلبك.', demo: 'سنتواصل معك عبر واتساب لتأكيد طلبك ورسوم التوصيل والدفع.', rm: 'حذف', wa: 'تأكيد عبر واتساب', fail: 'تعذّر إرسال الطلب. حاول مرة أخرى.', close: 'إغلاق', need: 'يرجى تعبئة الاسم والجوال والعنوان.', total: 'الإجمالي (بدون التوصيل)', terms: 'الشروط والإرجاع والخصوصية', loadfail: 'المنتجات تتأخر في التحميل. يمكنك الطلب مباشرة عبر واتساب:', none: 'لا توجد منتجات في هذا القسم بعد.', owa: 'اطلب عبر واتساب'}
   };
   const ART = {
     jacket: ['M32 18L44 14L50 30L56 14L68 18L88 46L78 54L72 46V88H28V46L22 54L12 46Z', 'M50 30V88'],
@@ -431,14 +436,7 @@ if (saved === 'ar') setLang('ar');
     sneaker: ['M10 62V48Q30 46 40 36L48 44Q60 46 78 56Q92 60 92 68V72H10Z', 'M10 66H92', 'M42 40L50 46', 'M48 36L56 44'],
     bag: ['M24 36H76L82 86H18Z', 'M36 36V28Q36 16 50 16Q64 16 64 28V36']
   };
-  const P = [
-    {id: 'p1', cat: 'tops', art: 'jacket', price: 420, en: 'Verde Bomber', ar: 'جاكيت فيردي', sizes: ['S', 'M', 'L', 'XL'], d: {en: 'Heavyweight bomber with a quiet sheen.', ar: 'جاكيت بومبر ثقيل بلمعة هادئة.'}},
-    {id: 'p2', cat: 'tops', art: 'hoodie', price: 260, en: 'Sand Hoodie', ar: 'هودي ساند', sizes: ['S', 'M', 'L', 'XL'], d: {en: 'Oversized fit in brushed cotton.', ar: 'قصّة واسعة من القطن المبطّن.'}},
-    {id: 'p3', cat: 'tops', art: 'tee', price: 120, en: 'Studio Tee', ar: 'تيشيرت ستوديو', sizes: ['S', 'M', 'L', 'XL'], d: {en: 'Clean everyday tee, premium jersey.', ar: 'تيشيرت يومي أنيق من قماش فاخر.'}},
-    {id: 'p4', cat: 'bottoms', art: 'denim', price: 310, en: 'Noir Denim', ar: 'جينز نوار', sizes: ['28', '30', '32', '34', '36'], d: {en: 'Straight cut, deep dark wash.', ar: 'قصّة مستقيمة بلون داكن عميق.'}},
-    {id: 'p5', cat: 'shoes', art: 'sneaker', price: 540, en: 'Court Sneaker', ar: 'حذاء كورت', sizes: ['40', '41', '42', '43', '44'], d: {en: 'Leather low-top with a gum sole.', ar: 'حذاء جلدي منخفض بنعل مطاطي.'}},
-    {id: 'p6', cat: 'bags', art: 'bag', price: 680, en: 'Mini Tote', ar: 'حقيبة ميني توت', sizes: [], d: {en: 'Structured leather tote, fits the essentials.', ar: 'حقيبة جلدية منظّمة تتسع لأغراضك.'}}
-  ];
+  const P = []; let loading = true, failed = false;
   const COL = [['forest', '#1B3022', 'Forest', 'أخضر غابة'], ['sand', '#F5F5DC', 'Sand', 'رملي'], ['black', '#111111', 'Black', 'أسود']];
   let cat = 'all', cart = [], step = 'cart', sel = null, loc = null, doneId = '';
   try { if (new URLSearchParams(location.search).get('for') === 'women') { cat = 'women'; addEventListener('load', () => setTimeout(() => { const el = document.getElementById('shop'); if (el) el.scrollIntoView(); }, 1200)); } } catch (e) {}
@@ -448,27 +446,55 @@ if (saved === 'ar') setLang('ar');
   const t = k => D[L()][k];
   const fmt = n => L() === 'ar' ? n.toLocaleString('en-US') + ' ' + CURAR : CUR + n.toLocaleString('en-US');
   const prod = id => P.find(p => p.id === id);
-  const pic = p => p.img ? `<img src="${p.img.replace(/"/g, '%22')}" alt="" loading="lazy">` : art(p.art);
+  const pic = (p, big) => { const src = big ? (p.img || p.thumb) : (p.thumb || p.img); return src ? `<img src="${src.replace(/"/g, '%22')}" alt="" loading="lazy" decoding="async">` : art(p.art); };
   const art = k => `<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">${ART[k].map(d => `<path d="${d}"/>`).join('')}</svg>`;
   const cname = k => { const c = COL.find(x => x[0] === k); return L() === 'ar' ? c[3] : c[2]; };
   const count = () => cart.reduce((a, i) => a + i.q, 0);
   const total = () => cart.reduce((a, i) => a + prod(i.id).price * i.q, 0);
 
+  function gridHTML() {
+    if (loading && !P.length) return Array(6).fill('<div class="pc sk"><span class="art"></span><b>&nbsp;</b><small>&nbsp;</small></div>').join('');
+    if (failed && !P.length) return `<p class="mut">${t('loadfail')} <a href="https://wa.me/967783254757" target="_blank" rel="noopener" style="color:var(--gold)">${t('owa')}</a></p>`;
+    const list = P.filter(p => cat === 'all' || (cat === 'women' ? p.audience === 'women' : p.cat === cat));
+    if (!list.length) return `<p class="mut">${t('none')}</p>`;
+    return list.map(p => `<button class="pc" data-a="open" data-id="${p.id}"><span class="art">${pic(p)}</span><b>${p[L()]}</b><small>${fmt(p.price)}</small></button>`).join('');
+  }
+  const pending = new Set();
+  function getImg(p) {
+    if (!p || p.img || pending.has(p.id) || !window.BL_getImage) return;
+    pending.add(p.id);
+    window.BL_getImage(p.id).then(src => { if (src) { p.img = src; patchImg(p); } }).catch(() => {}).then(() => pending.delete(p.id));
+  }
+  function patchImg(p) {
+    const el = document.querySelector('.pc[data-id="' + p.id + '"] .art'); if (el) el.innerHTML = pic(p);
+    if (sel && sel.id === p.id && !$('modal').hidden) modal();
+  }
+  let io = null;
+  function observeLazy() {
+    const need = P.filter(p => !p.thumb && !p.img);
+    if (!need.length) return;
+    if (!('IntersectionObserver' in window)) { need.forEach(getImg); return; }
+    if (io) io.disconnect();
+    io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); getImg(prod(e.target.dataset.id)); } }), {rootMargin: '400px'});
+    document.querySelectorAll('.pc[data-id]').forEach(el => { const p = prod(el.dataset.id); if (p && !p.thumb && !p.img) io.observe(el); });
+  }
   function renderShop() {
     $('sLbl').textContent = t('shop'); $('sH').innerHTML = t('h');
     $('chips').innerHTML = ['all', 'women', 'tops', 'bottoms', 'shoes', 'bags'].map(c => `<button class="chip" data-a="cat" data-v="${c}" aria-pressed="${c === cat}">${t(c)}</button>`).join('');
-    $('grid').innerHTML = P.filter(p => cat === 'all' || (cat === 'women' ? p.audience === 'women' : p.cat === cat)).map(p => `<button class="pc" data-a="open" data-id="${p.id}"><span class="art">${pic(p)}</span><b>${p[L()]}</b><small>${fmt(p.price)}</small></button>`).join('');
+    $('grid').innerHTML = gridHTML();
     $('cartbtn').innerHTML = `${t('bag')} <b>${count()}</b>`;
     if (!$('modal').hidden) modal();
     if (!$('drawer').hidden) drawer();
+    observeLazy();
     if (window.ScrollTrigger) ScrollTrigger.refresh();
   }
   window.renderShop = renderShop;
-  window.setProducts = l => { P.splice(0, P.length, ...l); cart = cart.filter(i => prod(i.id)); upd(); renderShop(); };
+  window.setProducts = l => { loading = false; failed = false; P.splice(0, P.length, ...l); cart = cart.filter(i => prod(i.id)); upd(); renderShop(); };
+  window.BL_setState = st => { loading = !!st.loading; failed = !!st.failed; renderShop(); };
 
   function modal() {
     const p = prod(sel.id);
-    $('modal').innerHTML = `<div class="mbox"><div class="art">${pic(p)}</div><div class="mi"><div class="row" style="justify-content:space-between"><b class="mt">${p[L()]}</b><button class="x" data-a="mclose" aria-label="${t('close')}">×</button></div><span class="pr">${fmt(p.price)}</span><p class="mut">${p.d[L()]}</p>` +
+    $('modal').innerHTML = `<div class="mbox"><div class="art">${pic(p, true)}</div><div class="mi"><div class="row" style="justify-content:space-between"><b class="mt">${p[L()]}</b><button class="x" data-a="mclose" aria-label="${t('close')}">×</button></div><span class="pr">${fmt(p.price)}</span><p class="mut">${p.d[L()]}</p>` +
       (p.sizes.length ? `<div><div class="mut">${t('size')}</div><div class="row">${p.sizes.map(s => `<button class="opt" data-a="size" data-v="${s}" aria-pressed="${s === sel.size}">${s}</button>`).join('')}</div></div>` : `<p class="mut">${t('one')}</p>`) +
       `<div><div class="mut">${t('color')}: ${cname(sel.color)}</div><div class="row">${COL.map(c => `<button class="sw" data-a="color" data-v="${c[0]}" style="background:${c[1]}" aria-label="${cname(c[0])}" aria-pressed="${c[0] === sel.color}"></button>`).join('')}</div></div>` +
       `<div class="row"><span class="mut">${t('qty')}</span><button class="opt" data-a="q" data-v="-1" aria-label="-">−</button><b>${sel.q}</b><button class="opt" data-a="q" data-v="1" aria-label="+">+</button></div><button class="pbtn" data-a="add">${t('add')} · ${fmt(p.price * sel.q)}</button></div></div>`;
@@ -499,7 +525,7 @@ if (saved === 'ar') setLang('ar');
     const a = e.target.closest('[data-a]'); if (!a) return;
     const k = a.dataset.a, v = a.dataset.v, i = +a.dataset.i;
     if (k === 'cat') { cat = v; renderShop(); }
-    else if (k === 'open') { const p = prod(a.dataset.id); sel = {id: p.id, size: p.sizes[0] || '', color: 'forest', q: 1}; openModal(); }
+    else if (k === 'open') { const p = prod(a.dataset.id); sel = {id: p.id, size: p.sizes[0] || '', color: 'forest', q: 1}; openModal(); getImg(p); }
     else if (k === 'size') { sel.size = v; modal(); }
     else if (k === 'color') { sel.color = v; modal(); }
     else if (k === 'q') { sel.q = Math.max(1, Math.min(9, sel.q + +v)); modal(); }
@@ -536,17 +562,22 @@ if (saved === 'ar') setLang('ar');
 })();
 </script>
 <script type="module">
-import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import {getFirestore, collection, getDocs, query, where, doc, setDoc, serverTimestamp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
-const app = initializeApp(window.BL.config), db = getFirestore(app);
+const B = window.BL, C = B.config;
+const SDK = {};
+const loadSDK = () => SDK.p || (SDK.p = (async () => {
+  const [a, f] = await Promise.all([
+    import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js'),
+    import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js')]);
+  SDK.app = a.initializeApp(C); SDK.f = f; SDK.db = f.getFirestore(SDK.app); return SDK;
+})());
 let ga = null;
-import('https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js')
-  .then(m => { ga = {m, a: m.getAnalytics(app)}; })
-  .catch(() => {});
 const track = (name, p) => { try { if (ga) ga.m.logEvent(ga.a, name, p || {}); } catch (e) {} };
+const startAnalytics = () => loadSDK().then(s => import('https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js').then(m => { ga = {m, a: m.getAnalytics(s.app)}; })).catch(() => {});
 document.addEventListener('click', e => { if (e.target.closest && e.target.closest('a[href*="wa.me"]')) track('whatsapp_click'); });
+
 window.BL_placeOrder = async o => {
-  await setDoc(doc(db, 'orders', o.id), {...o, status: 'new', createdAt: serverTimestamp()});
+  const s = await loadSDK(), f = s.f;
+  await f.setDoc(f.doc(s.db, 'orders', o.id), {...o, status: 'new', createdAt: f.serverTimestamp()});
   track('order_placed', {value: o.total, currency: 'YER'});
   const E = window.BL.emailjs;
   if (E && E.serviceId && E.templateId && E.publicKey) {
@@ -556,10 +587,45 @@ window.BL_placeOrder = async o => {
         items: o.items.map(i => `${i.name} | ${i.size || '-'} | ${i.color} x ${i.q} @ ${i.price}`).join('\n')}})}).catch(() => {});
   }
 };
-getDocs(query(collection(db, 'products'), where('active', '==', true))).then(snap => {
-  const list = snap.docs.map(d => { const x = d.data(); return {id: d.id, cat: x.cat, audience: x.audience || 'all', art: 'tee', img: (x.images || [])[0] || '', price: Number(x.price), en: x.nameEn, ar: x.nameAr || x.nameEn, sizes: x.sizes || [], d: {en: x.descEn || '', ar: x.descAr || x.descEn || ''}}; });
-  if (list.length) window.setProducts(list);
-}).catch(console.error);
+
+// Light product list: text + small thumbnail only (full images are fetched later, one by one).
+const BASE = `https://firestore.googleapis.com/v1/projects/${C.projectId}/databases/(default)/documents`;
+const KEY = encodeURIComponent(C.apiKey);
+const val = v => v == null ? undefined : 'stringValue' in v ? v.stringValue : 'integerValue' in v ? Number(v.integerValue) : 'doubleValue' in v ? v.doubleValue : 'booleanValue' in v ? v.booleanValue : 'timestampValue' in v ? v.timestampValue : 'arrayValue' in v ? (v.arrayValue.values || []).map(val) : undefined;
+const FIELDS = ['nameEn', 'nameAr', 'descEn', 'descAr', 'price', 'cat', 'audience', 'sizes', 'thumb', 'createdAt'];
+const fromRest = (id, f) => { const g = k => val(f[k]); return {id, cat: g('cat'), audience: g('audience') || 'all', art: 'tee', thumb: g('thumb') || '', img: '', price: Number(g('price')), en: g('nameEn'), ar: g('nameAr') || g('nameEn'), sizes: g('sizes') || [], d: {en: g('descEn') || '', ar: g('descAr') || g('descEn') || ''}, ts: g('createdAt') || ''}; };
+const newestFirst = l => l.sort((a, b) => String(b.ts).localeCompare(String(a.ts)));
+async function fetchRest() {
+  const r = await fetch(`${BASE}:runQuery?key=${KEY}`, {method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({structuredQuery: {from: [{collectionId: 'products'}], where: {fieldFilter: {field: {fieldPath: 'active'}, op: 'EQUAL', value: {booleanValue: true}}}, select: {fields: FIELDS.map(fieldPath => ({fieldPath}))}}})});
+  if (!r.ok) throw new Error('rest ' + r.status);
+  const rows = await r.json();
+  return newestFirst(rows.filter(x => x.document).map(x => fromRest(x.document.name.split('/').pop(), x.document.fields || {})));
+}
+async function fetchSDK() {
+  const s = await loadSDK(), f = s.f;
+  const snap = await f.getDocs(f.query(f.collection(s.db, 'products'), f.where('active', '==', true)));
+  return newestFirst(snap.docs.map(d => { const x = d.data(); return {id: d.id, cat: x.cat, audience: x.audience || 'all', art: 'tee', thumb: x.thumb || '', img: (x.images || [])[0] || '', price: Number(x.price), en: x.nameEn, ar: x.nameAr || x.nameEn, sizes: x.sizes || [], d: {en: x.descEn || '', ar: x.descAr || x.descEn || ''}, ts: x.createdAt && x.createdAt.toDate ? x.createdAt.toDate().toISOString() : ''}; }));
+}
+window.BL_getImage = async id => {
+  try {
+    const r = await fetch(`${BASE}/products/${encodeURIComponent(id)}?mask.fieldPaths=images&key=${KEY}`);
+    if (r.ok) { const d = await r.json(); const v = d.fields && d.fields.images && d.fields.images.arrayValue && d.fields.images.arrayValue.values; return v && v[0] ? v[0].stringValue : ''; }
+  } catch (e) {}
+  const s = await loadSDK(), f = s.f; const snap = await f.getDoc(f.doc(s.db, 'products', id)); return ((snap.data() || {}).images || [])[0] || '';
+};
+
+const CK = 'bl-products-v2';
+try { const c = JSON.parse(localStorage.getItem(CK) || 'null'); if (c && c.length) window.setProducts(c); } catch (e) {}
+(async () => {
+  let list = null;
+  try { list = await fetchRest(); } catch (e) { try { list = await fetchSDK(); } catch (e2) {} }
+  if (list) {
+    window.setProducts(list);
+    try { localStorage.setItem(CK, JSON.stringify(list.map(p => ({...p, img: ''})))); } catch (e) {}
+  } else if (window.BL_setState) window.BL_setState({loading: false, failed: true});
+  setTimeout(startAnalytics, 1500);
+})();
 </script>
 </body>
 </html>
